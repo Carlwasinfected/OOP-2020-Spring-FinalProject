@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     /* 初始化 */
     // title ...
     this->setWindowTitle("房贷计算器系统");
-    this->setWindowIcon(QIcon("../resource/img/logo_test.ico"));
+    this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
     // label msg config setting
 //    ui->welcomeMsg->setTextFormat(Qt::RichText);
     ui->welcomeMsg->setText(tr("<h2> hi <font color=red> red </font></h2>"));

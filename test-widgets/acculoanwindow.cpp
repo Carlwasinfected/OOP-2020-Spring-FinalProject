@@ -9,6 +9,7 @@ AccuLoanWindow::AccuLoanWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("公积金贷款计算器");
+    this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
     ui->line_area->setText(QString::number(0.00));
     ui->line_loan_sum->setText(QString::number(0.00));
     ui->line_price_per_meter->setText(QString::number(0.00));

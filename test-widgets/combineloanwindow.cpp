@@ -11,6 +11,7 @@ CombineLoanWindow::CombineLoanWindow(QWidget *parent) :
 
     ui->setupUi(this);
     this->setWindowTitle("组合型房贷计算器");
+    this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
     ui->lineEdit_comm->setText(QString::number(0.00));
     ui->lineEdit_accu_fund->setText(QString::number(0.00));
 

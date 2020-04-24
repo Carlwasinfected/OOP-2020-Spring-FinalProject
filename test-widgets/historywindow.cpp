@@ -7,6 +7,7 @@ HistoryWindow::HistoryWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("历史记录查询");
+    this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
     ShowHistory();
     connect(ui->pushbutton_return, SIGNAL(clicked()), this, SLOT(ReturnToMainWindow()));
     connect(ui->pushutton_clear_history, SIGNAL(clicked()), this, SLOT(ClearHistory()));
