@@ -235,6 +235,7 @@ Makefile: ../test-widgets/test-widgets.pro C:/Qt/Qt5.12.7/5.12.7/mingw73_64/mksp
 		C:/Qt/Qt5.12.7/5.12.7/mingw73_64/mkspecs/features/lex.prf \
 		../test-widgets/test-widgets.pro \
 		C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5MultimediaWidgets.prl \
+		C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5PrintSupport.prl \
 		C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5Widgets.prl \
 		C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5Multimedia.prl \
 		C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5Gui.prl \
@@ -414,6 +415,7 @@ C:/Qt/Qt5.12.7/5.12.7/mingw73_64/mkspecs/features/yacc.prf:
 C:/Qt/Qt5.12.7/5.12.7/mingw73_64/mkspecs/features/lex.prf:
 ../test-widgets/test-widgets.pro:
 C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5MultimediaWidgets.prl:
+C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5PrintSupport.prl:
 C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5Widgets.prl:
 C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5Multimedia.prl:
 C:/Qt/Qt5.12.7/5.12.7/mingw73_64/lib/Qt5Gui.prl:

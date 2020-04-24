@@ -11,6 +11,7 @@ HistoryWindow::HistoryWindow(QWidget *parent) :
     ShowHistory();
     connect(ui->pushbutton_return, SIGNAL(clicked()), this, SLOT(ReturnToMainWindow()));
     connect(ui->pushutton_clear_history, SIGNAL(clicked()), this, SLOT(ClearHistory()));
+    connect(ui->pushbutton_save, SIGNAL(clicked()), this, SLOT(SaveHistoryResult()));
 }
 
 HistoryWindow::~HistoryWindow()
@@ -63,5 +64,25 @@ void HistoryWindow::ClearHistory() {
           // Cancel was clicked
         qDebug() << "cancel button was clicked" << endl;
           break;
+    }
+}
+
+void HistoryWindow::SaveHistoryResult() {
+    QString save_filename = QFileDialog::getSaveFileName(this, tr("保存历史记录为PDF文件"), "",  tr("History Result File (*.pdf)"));
+    if(!save_filename.isNull()) {
+        qDebug() << "save here: " << save_filename;
+        QString html = ui->textBrowser->toHtml();
+
+        QTextDocument document;
+        document.setHtml(html);
+
+        // 设置printer输出格式为pdf
+        QPrinter printer(QPrinter::PrinterResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(save_filename);
+        // 生成.pdf文件
+        document.print(&printer);
+    } else {
+        qDebug() << "click cancel button";
     }
 }

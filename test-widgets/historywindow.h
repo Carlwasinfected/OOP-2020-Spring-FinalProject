@@ -6,6 +6,9 @@
 #include <QString>
 #include <QMessageBox>
 #include <QMainWindow>
+#include <QFileDialog>
+#include <QPrinter>
+#include <QPainter>
 
 namespace Ui {
 class HistoryWindow;
@@ -26,6 +29,7 @@ private:
 private slots:
     void ReturnToMainWindow();
     void ClearHistory();
+    void SaveHistoryResult();
 };
 
 #endif // HISTORYWINDOW_H

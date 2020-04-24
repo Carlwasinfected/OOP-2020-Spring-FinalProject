@@ -28,6 +28,7 @@ public:
     QVBoxLayout *verticalLayout;
     QTextBrowser *textBrowser;
     QPushButton *pushutton_clear_history;
+    QPushButton *pushbutton_save;
     QPushButton *pushbutton_return;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -58,6 +59,13 @@ public:
 
         verticalLayout->addWidget(pushutton_clear_history);
 
+        pushbutton_save = new QPushButton(centralwidget);
+        pushbutton_save->setObjectName(QString::fromUtf8("pushbutton_save"));
+        pushbutton_save->setFont(font);
+        pushbutton_save->setCursor(QCursor(Qt::PointingHandCursor));
+
+        verticalLayout->addWidget(pushbutton_save);
+
         pushbutton_return = new QPushButton(centralwidget);
         pushbutton_return->setObjectName(QString::fromUtf8("pushbutton_return"));
         pushbutton_return->setFont(font);
@@ -83,6 +91,7 @@ public:
     {
         HistoryWindow->setWindowTitle(QApplication::translate("HistoryWindow", "MainWindow", nullptr));
         pushutton_clear_history->setText(QApplication::translate("HistoryWindow", "\346\270\205 \351\233\266", nullptr));
+        pushbutton_save->setText(QApplication::translate("HistoryWindow", "\344\277\235 \345\255\230", nullptr));
         pushbutton_return->setText(QApplication::translate("HistoryWindow", "\350\277\224 \345\233\236", nullptr));
     } // retranslateUi
 
