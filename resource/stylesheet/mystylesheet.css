@@ -1,0 +1,11 @@
+
+/* 设置QPushButton的样式表 */
+QPushButton{color:#ffffff;background:#08bb06;
+    border-radius:5px; border-style: outset;
+    width:112px;height:56px;
+    font-family:microsoft yahei ui,microsoft yahei;
+    font: bold 14px;
+    font-size:20px;}
+QPushButton:disabled{color:#FFFFFF}
+QPushButton:pressed{background:#d4ebd4;}
+

@@ -6,18 +6,28 @@
 #include  "mainwindow.h"
 #include <QApplication>
 #include <QFont>
+#include <QFile>
 // 小心重复include的问题
 
+
+static  void SetMyStyleSheet(const QString &styleName)
+{
+    QFile file(styleName);
+    file.open(QFile::ReadOnly);
+    QString css = QLatin1String(file.readAll());
+    if(!file.exists()) {
+        qDebug() << "No File Exits!";
+    }
+    qDebug() << file.fileName();
+    qApp->setStyleSheet(css);
+}
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //  show login dialog first
-        LoginDialog* ld = new LoginDialog();
-//        GlobalVal::main_window = new MainWindow(NULL);
-        ld->show();
-//    CommLoanWindow* clw = new CommLoanWindow();
-//    clw->show();
+    SetMyStyleSheet("../resource/stylesheet/mystylesheet.css");
+    LoginDialog* ld = new LoginDialog();
+    ld->show();
 
     return a.exec();
 }
