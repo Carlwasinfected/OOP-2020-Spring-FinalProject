@@ -44,6 +44,7 @@ public:
     QWidget *horizontalLayoutWidget_2;
     QHBoxLayout *horizontalLayoutLeft;
     QLabel *welcomeMsg;
+    QLabel *label;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -139,6 +140,15 @@ public:
 
         horizontalLayoutLeft->addWidget(welcomeMsg);
 
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(500, 20, 351, 61));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
+        font2.setPointSize(11);
+        font2.setBold(false);
+        font2.setWeight(50);
+        label->setFont(font2);
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -160,6 +170,7 @@ public:
         pushbutton_combine_loan->setText(QApplication::translate("MainWindow", "\347\273\204\345\220\210\345\236\213\350\264\267\346\254\276", nullptr));
         pushbutton_history_query->setText(QApplication::translate("MainWindow", "\345\216\206\345\217\262\346\237\245\350\257\242\350\256\260\345\275\225", nullptr));
         welcomeMsg->setText(QApplication::translate("MainWindow", "\346\254\242\350\277\216\346\202\250\357\274\214\347\224\250\346\210\267carlwang\357\274\201...tbd", nullptr));
+        label->setText(QApplication::translate("MainWindow", " \346\210\277\350\264\267\345\260\217\347\247\221\346\231\256", nullptr));
     } // retranslateUi
 
 };

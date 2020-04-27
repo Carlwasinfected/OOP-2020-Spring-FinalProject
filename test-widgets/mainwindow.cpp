@@ -32,10 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
     // label msg config setting
 //    ui->welcomeMsg->setTextFormat(Qt::RichText);
-    ui->welcomeMsg->setText(tr("<h2> hi <font color=red> red </font></h2>"));
+//    ui->welcomeMsg->setText(tr("<h2> hi <font color=red> red </font></h2>"));
     ui->welcomeMsg->setText(QString::fromStdString(GetMsgFromLogin()));
 
-
+    ui->label->setText(tr("<h4><font color=blue> 房贷小科普</font></h4>"));
     // video playing
     // test can open test.mp4
 
@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     videoWidget->show();
     videoWidget->showFullScreen();
     player->play();
+    qDebug() << videoWidget->size();
     // 全局
     GlobalVal::my_player = player;
     // semi-red color
