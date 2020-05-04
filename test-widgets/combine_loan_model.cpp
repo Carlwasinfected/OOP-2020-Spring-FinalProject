@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+/*构造函数*/
 CombineLoanModel::CombineLoanModel(double commercial_loan_, double commercial_inst_,
                                    double accu_fund_loan_, double accu_fund_inst_,
                                    int paid_month_, int paid_type_) :
@@ -17,22 +17,27 @@ CombineLoanModel::CombineLoanModel(double commercial_loan_, double commercial_in
     qDebug() << "constrcutor from class BaseLoanModel";
 }
 
+/*析构函数*/
 CombineLoanModel::~CombineLoanModel() {
     qDebug() << "desctructor from class CombineLoanModel";
 };
+
 
 std::string CombineLoanModel::CalLoan()
 {
     double loan_sum;  // 两种贷款的和
     double inst_sum;
     double paid_sum;
+
+    // 获取时间戳
     QDateTime datetime(QDateTime::currentDateTime());
     std::string str_res = "";
     std::string str_datetime = datetime.toString("yyyy-MM-dd hh:mm::ss ddd").toStdString();
 
-
-    if (paid_type == 1) // 等额本息
+    // 根据还款方式选用不同公式计算贷款
+    if (paid_type == 1) 
     {
+        // 等额本息
         double loan_comm_per_month;
         double loan_accu_per_month;
         double loan_sum_per_month;

@@ -1,16 +1,21 @@
 #include "base_loan_model.h"
 
+/*构造函数*/
 BaseLoanModel::BaseLoanModel(int paid_month_, int paid_type_) {
     this->paid_type = paid_type_;
     this->paid_month = paid_month_;
     qDebug() << "constrcutor from class BaseLoanModel";
 };
 
+/*虚析构函数*/
 BaseLoanModel::~BaseLoanModel() {
     qDebug() << "desctructor from class BaseLoanModel";
 };
 
-// key: currentIndex of ComboBox; value: paid_month_sum
+
+/* @key: currentIndex of ComboBox; 
+*  @value: paid_month_sum；
+*/
 QHash<int,int> BaseLoanModel::paid_month_map = {
     {0, 180},  // 15 years
     {1, 168},

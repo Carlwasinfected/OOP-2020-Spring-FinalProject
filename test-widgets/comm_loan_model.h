@@ -19,9 +19,8 @@ public:
                   double house_rate_,  int paid_month_, int paid_type_);
     ~CommLoanModel();
     virtual std::string CalLoan();
-    static QHash<int, double> ratio_map;
-    /* TODO */
-    static QHash<int, double> rate_map; // 下拉框选择给定好的利率
+    static QHash<int, double> ratio_map; // 下拉框选择index和按揭成数的mapping
+    static QHash<int, double> rate_map; // 下拉框index和给定好的利率的mapping
 
 private:
     // based on house price

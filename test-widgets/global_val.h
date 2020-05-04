@@ -8,6 +8,8 @@ class GlobalVal
 public:
     GlobalVal();
     ~GlobalVal();
+
+    // 静态全局变量
     static MainWindow * main_window;
     static QMediaPlayer* my_player;
     static QString cur_username;

@@ -34,7 +34,6 @@ private:
     QMediaPlayer* my_player;
 
 private slots:
-//    void VideoFullScreen();
     void ShowCombineLoanWindow();
     void ShowHistoryWindow();
     void ShowCommLoanWindow();

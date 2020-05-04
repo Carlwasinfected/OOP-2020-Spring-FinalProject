@@ -14,11 +14,12 @@ public:
     ~CombineLoanModel();
 
     virtual std::string CalLoan();
+    
 private:
-    double commercial_loan;
-    double commercial_inst; // inst means interests
-    double accu_fund_loan;
-    double accu_fund_inst;
+    double commercial_loan; // 商业贷款额
+    double commercial_inst; // 商业贷款利息
+    double accu_fund_loan; // 公积金贷款额
+    double accu_fund_inst; // 公积金贷款利息
 };
 
 #endif

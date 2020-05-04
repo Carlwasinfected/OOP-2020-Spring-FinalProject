@@ -10,6 +10,7 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
     this->setWindowTitle("房贷计算器系统");
     this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
+    
     // bind singals and slots
     connect(ui->Login_Button_2, SIGNAL(clicked()), this, SLOT(CheckLoginValid()));
 }

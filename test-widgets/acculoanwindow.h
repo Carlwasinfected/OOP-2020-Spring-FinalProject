@@ -29,6 +29,7 @@ private:
     void SetStackedWidgetSize();
     void SendResultToCache(QString qstr, int input_paid_type);
     int CheckInputValid(std::string &msg);
+    
 private slots:
     void CalLoan();
     void ConfirmWhetherClear();

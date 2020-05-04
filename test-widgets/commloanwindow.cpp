@@ -2,10 +2,12 @@
 #include "commloanwindow.h"
 #include "ui_commloanwindow.h"
 
+/*构造函数*/
 CommLoanWindow::CommLoanWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CommLoanWindow)
 {
+    // 初始化ui
     ui->setupUi(this);
     this->setWindowTitle("商业型贷款计算器");
     this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
@@ -27,6 +29,7 @@ CommLoanWindow::CommLoanWindow(QWidget *parent) :
     connect(ui->pushButton_clear, SIGNAL(clicked()), this, SLOT(ConfirmWhetherClear()));
 }
 
+/*析构函数*/
 CommLoanWindow::~CommLoanWindow()
 {
     delete ui;
@@ -86,6 +89,7 @@ void CommLoanWindow::closeEvent(QCloseEvent *event) {
     event->accept();
 }
 
+/*将查询结果写入cache*/
 void CommLoanWindow::SendResultToCache(QString qstr, int input_paid_type) {
     QQueue<QString>* cptr = &MainWindow::result_cache;
     QString qstr_to_cache = "";
@@ -103,9 +107,12 @@ void CommLoanWindow::SendResultToCache(QString qstr, int input_paid_type) {
     cptr->enqueue(qstr_to_cache);
 }
 
+/*计算贷款*/
 void CommLoanWindow::CalLoan() {
     QString qstr = "";
     std::string msg = "";
+
+    // 检查输入合法性
     if(CheckInputValid(msg)) {
         double input_price_per_meter = 0;
         double input_house_area = 0;
@@ -123,6 +130,7 @@ void CommLoanWindow::CalLoan() {
             // page 2
             input_loan_sum = ui->line_loan_sum->text().toDouble() * 10000.0;
         }
+
         const double input_loan_rate = ui->spinbox_loan_rate->value() / 1200.0;  // 年利率-->月利率
         const int input_paid_month_idx = ui->combo_box_paid_month->currentIndex();
         const int input_paid_month = BaseLoanModel::paid_month_map[input_paid_month_idx];
@@ -133,6 +141,7 @@ void CommLoanWindow::CalLoan() {
             input_paid_type = 2;  // 等额本金
         }
 
+        // 加载模型对象，进行商业贷款计算
         CommLoanModel* model = new CommLoanModel(current_page_index, input_houseloan_ratio,
                                                     input_price_per_meter,
                                                     input_house_area,  input_loan_sum,
@@ -141,9 +150,9 @@ void CommLoanWindow::CalLoan() {
         qstr = QString::fromStdString(model->CalLoan());
         delete model;
 
-        qDebug() << "input comm loan rate is: " << input_loan_rate << endl;
-        qDebug() << "input_paid_month_idx " << input_paid_month_idx << endl;
-        qDebug() << "paid type is :  " << input_paid_type << endl;
+        // qDebug() << "input comm loan rate is: " << input_loan_rate << endl;
+        // qDebug() << "input_paid_month_idx " << input_paid_month_idx << endl;
+        // qDebug() << "paid type is :  " << input_paid_type << endl;
 
         // send string result to cache
         SendResultToCache(qstr, input_paid_type);
@@ -152,6 +161,7 @@ void CommLoanWindow::CalLoan() {
         ui->result_browser->setText(qstr);
 
     } else {
+        // 输入不合法 弹出警告
         QMessageBox::warning(this, tr("警告提示"),
                                            tr(msg.c_str()),
                                            QMessageBox::Ok |QMessageBox::Default,
@@ -159,7 +169,9 @@ void CommLoanWindow::CalLoan() {
     }
 }
 
-
+/* 判断输入合法性
+*  @msg：警告信息
+*/
 int CommLoanWindow::CheckInputValid(std::string &msg) {
     int is_valid = 1;
 

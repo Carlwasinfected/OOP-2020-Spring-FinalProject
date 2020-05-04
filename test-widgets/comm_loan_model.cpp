@@ -1,5 +1,6 @@
 #include "comm_loan_model.h"
 
+/*构造函数*/
 CommLoanModel::CommLoanModel(int cal_type_,double houseloan_ratio_,
                              double price_per_meter_,
                              double house_area_, double loan_sum_,
@@ -22,11 +23,14 @@ CommLoanModel::CommLoanModel(int cal_type_,double houseloan_ratio_,
     qDebug() << "constrcutor from class CommLoanModel";
 }
 
+/*析构函数*/
 CommLoanModel::~CommLoanModel() {
     qDebug() << "destrcutor from class CommLoanModel";
 }
 
+/*计算贷款*/
 std::string CommLoanModel::CalLoan() {
+    // 获取时间戳
     QDateTime datetime(QDateTime::currentDateTime());
     std::string str_datetime = datetime.toString("yyyy-MM-dd hh:mm::ss ddd").toStdString();
     std::string str_res = "<h4>查询时间：<font color = green>" + str_datetime + "</font></h4>";
@@ -34,7 +38,7 @@ std::string CommLoanModel::CalLoan() {
     double paid_all;
     double paid_inst = 0;
 
-    // todo
+    // 根据还款类型计算嗲款
     if (paid_type == 1) {         // 等额本息
 
         /* 首付 */
@@ -98,8 +102,7 @@ std::string CommLoanModel::CalLoan() {
         str_res += "<h4>还款总额： " + std::to_string((int)round(paid_all)) + " 元</h4>";
         str_res += "<h4>还款月数： " + std::to_string(paid_month) + " 个月</h4>";
     }
-
-
+    
     return str_res;
 }
 

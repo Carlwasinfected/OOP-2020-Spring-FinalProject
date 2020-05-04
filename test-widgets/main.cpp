@@ -1,15 +1,12 @@
 #include "global_val.h"
 #include "logindialog.h"
-//#include "combineloanwindow.h"
-//#include "combine_loan_model.h"
 #include "commloanwindow.h"
 #include  "mainwindow.h"
 #include <QApplication>
 #include <QFont>
 #include <QFile>
-// 小心重复include的问题
 
-
+/* 设置样式表 */
 static  void SetMyStyleSheet(const QString &styleName)
 {
     QFile file(styleName);
@@ -25,7 +22,11 @@ static  void SetMyStyleSheet(const QString &styleName)
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    
+    // 设置应用程序的样式表
     SetMyStyleSheet("../resource/stylesheet/mystylesheet.css");
+    
+    // 显示登录对话框
     LoginDialog* ld = new LoginDialog();
     ld->show();
 

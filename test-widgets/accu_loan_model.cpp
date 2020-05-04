@@ -1,11 +1,13 @@
 #include "accu_loan_model.h"
 
+/*构造函数*/
 AccuLoanModel::AccuLoanModel(int cal_type_,double houseloan_ratio_,
                              double price_per_meter_,
                              double house_area_, double loan_sum_,
                              double loan_rate_,  int paid_month_,
                              int paid_type_) : BaseLoanModel(paid_month_, paid_type_),
                              cal_type(cal_type_) {
+    // 根据计算贷款的类型初始化属性
     if (cal_type == 0) {
         // page 1 - based on house price&area
         this->houseloan_ratio = houseloan_ratio_;
@@ -15,18 +17,21 @@ AccuLoanModel::AccuLoanModel(int cal_type_,double houseloan_ratio_,
         this->loan_sum = houseloan_ratio * house_price_all;
 
     } else {
-        // page 2 (cal_type == 1)
+        // page 2 - based on the amount of loan
         this->loan_sum = loan_sum_;
    }
     this->loan_rate = loan_rate_;
     qDebug() << "constrcutor from class AccuLoanModel";
 }
 
+/*析构函数*/
 AccuLoanModel::~AccuLoanModel() {
     qDebug() << "destrcutor from class AccuLoanModel";
 }
 
+/*计算贷款*/
 std::string AccuLoanModel::CalLoan() {
+    // 获取时间戳
     QDateTime datetime(QDateTime::currentDateTime());
     std::string str_datetime = datetime.toString("yyyy-MM-dd hh:mm::ss ddd").toStdString();
     std::string str_res = "<h4>查询时间：<font color = green>" + str_datetime + "</font></h4>";
@@ -34,6 +39,7 @@ std::string AccuLoanModel::CalLoan() {
     double paid_all = 0;
     double paid_inst = 0;
 
+    // 根据不同还款类型，使用不同公式，计算贷款结果
     if (paid_type == 1) {
         // 等额本息方式
         double loan_accu_per_month;
@@ -98,7 +104,6 @@ std::string AccuLoanModel::CalLoan() {
         str_res += "<h4>还款总额： " + std::to_string((int)round(paid_all)) + " 元</h4>";
         str_res += "<h4>还款月数： " + std::to_string(paid_month) + " 个月</h4>";
     }
-
 
     return str_res;
 }

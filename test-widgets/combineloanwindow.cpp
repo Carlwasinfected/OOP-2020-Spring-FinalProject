@@ -3,12 +3,12 @@
 #include "ui_combineloanwindow.h"
 
 
-
+/*构造函数*/
 CombineLoanWindow::CombineLoanWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::CombineLoanWindow)
 {
-
+    // 初始化ui
     ui->setupUi(this);
     this->setWindowTitle("组合型房贷计算器");
     this->setWindowIcon(QIcon("../resource/img/mainwindow_logo.ico"));
@@ -19,20 +19,24 @@ CombineLoanWindow::CombineLoanWindow(QWidget *parent) :
     ui->lineEdit_comm->setValidator(new QDoubleValidator(0.00, std::numeric_limits<double>::max(),2,this));
     ui->lineEdit_accu_fund->setValidator(new QDoubleValidator(0.00, std::numeric_limits<double>::max(),2,this));
 
-    // bind SIGNALS and SLOTS
+    // binding SIGNALS and SLOTS
     connect(ui->pushButton_confirm, SIGNAL(clicked()), this, SLOT(CalLoan()));
     connect(ui->pushButton_clear, SIGNAL(clicked()), this, SLOT(ConfirmWhetherClear()));
     qDebug() << "Construct CombineLoanWindow Class";
 }
 
+/*析构函数*/
 CombineLoanWindow::~CombineLoanWindow()
 {
     delete ui;
 }
 
+/*计算贷款*/
 void CombineLoanWindow::CalLoan() {
     QString qstr = "";
     std::string msg = "";
+
+    // 判断输入合法性
     if(CheckInputValid(msg)) {
 
         // if input is valid, then get input & new object
@@ -56,20 +60,21 @@ void CombineLoanWindow::CalLoan() {
 
         delete model;
 
-        qDebug() << "input_accu_fund_loan " << input_accu_fund_loan << endl;
-        qDebug() << "input_comm_loan" << input_comm_loan << endl;
-        qDebug() << "input_accu_fund_inst " << input_accu_fund_inst << endl;
-        qDebug() << "input_comm_inst " << input_comm_inst << endl;
-        qDebug() << "input_paid_month_idx " << input_paid_month_idx << endl;
-        qDebug() << "paid type is :  " << input_paid_type << endl;
+        // qDebug() << "input_accu_fund_loan " << input_accu_fund_loan << endl;
+        // qDebug() << "input_comm_loan" << input_comm_loan << endl;
+        // qDebug() << "input_accu_fund_inst " << input_accu_fund_inst << endl;
+        // qDebug() << "input_comm_inst " << input_comm_inst << endl;
+        // qDebug() << "input_paid_month_idx " << input_paid_month_idx << endl;
+        // qDebug() << "paid type is :  " << input_paid_type << endl;
 
         // send string result to cache
         SendResultToCache(qstr, input_paid_type);
+        
         // in the end setText;
-
         ui->result_browser->setText(qstr);
 
     } else {
+        // 输入不合法 弹出警告信息
         QMessageBox::warning(this, tr("警告提示"),
                                            tr(msg.c_str()),
                                            QMessageBox::Ok |QMessageBox::Default,
@@ -77,7 +82,10 @@ void CombineLoanWindow::CalLoan() {
     }
 }
 
-
+/*将查询结果送入缓存
+* @qstr： 查询结果字符串
+* @input_paid_type: 用户选择的还款类型
+*/
 void CombineLoanWindow::SendResultToCache(QString qstr, int input_paid_type) {
     QQueue<QString>* cptr = &MainWindow::result_cache;
     QString qstr_to_cache = "";
@@ -87,24 +95,31 @@ void CombineLoanWindow::SendResultToCache(QString qstr, int input_paid_type) {
     } else {
         type = "等额本金";
     }
+
+    // 拼接得到待写入的字符串
     qstr_to_cache = "<h4> 还款类型：<font color = red> " + type + "</font></h4>";
     qstr_to_cache += qstr;
 
+    // 维护缓存队列长度小于等于5
     if (cptr->size() >=5) {
         cptr->dequeue();
     }
     cptr->enqueue(qstr_to_cache);
 }
 
+/* 确认是否清零重置用户输入*/
 
 void CombineLoanWindow::ConfirmWhetherClear() {
+    // 弹出警告框并获取用户点击输入
     int ret = QMessageBox::warning(this, tr("警告提示"),
                                    tr("您确定要执行清空操作吗?\n"),
                                    QMessageBox::Ok |QMessageBox::Default,
                                    QMessageBox::Cancel | QMessageBox::Escape, 0);
+    
+    // 判读用户对警告窗的选择
     switch (ret) {
       case QMessageBox::Ok:
-          // Ok was clicked
+        // Ok was clicked
         qDebug() << "ok button was clicked " << endl;
         ui->lineEdit_comm->text().clear();
         ui->lineEdit_comm->setText(QString::number(0.00));
@@ -115,11 +130,12 @@ void CombineLoanWindow::ConfirmWhetherClear() {
         ui->spinbox_accu_fund->text().clear();
         ui->spinbox_accu_fund->setValue(0.00);
         qDebug() << "clear op finished" << endl;
-          break;
+        break;
+
       case QMessageBox::Cancel:
-          // Cancel was clicked
+        // Cancel was clicked
         qDebug() << "cancel button was clicked" << endl;
-          break;
+        break;
     }
 
 }
